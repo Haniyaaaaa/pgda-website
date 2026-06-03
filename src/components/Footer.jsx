@@ -1,3 +1,5 @@
+import Logo from "./Logo";
+
 const links = [
   { href: "#roadmap", label: "Roadmap" },
   { href: "#fields", label: "Fields" },
@@ -12,9 +14,8 @@ export default function Footer() {
       style={{ borderColor: "var(--border)" }}
     >
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
-        <a href="#" className="font-syne text-base font-extrabold">
-          <span style={{ color: "var(--accent)" }}>PGDA</span>
-          <span style={{ color: "var(--text)" }}> · ALLIANCE</span>
+        <a href="#" className="transition-opacity duration-200 hover:opacity-90">
+          <Logo size="footer" showAlliance />
         </a>
 
         <p

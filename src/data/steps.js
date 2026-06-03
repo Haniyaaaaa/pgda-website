@@ -11,9 +11,28 @@ export const steps = [
     id: 1,
     label: "Understand",
     title: "What is Game Dev?",
-    description:
-      "Game development is not only programming. A game is created by multiple disciplines working together — explore each field before choosing your path.",
-    videoKey: "step1",
+    description: "Game development is not only programming.",
+    videoKey: null,
+    understandBody: [
+      "A game is created by multiple disciplines working together.",
+    ],
+    mainFields: [
+      "Game Programming",
+      "Game Design",
+      "2D Art",
+      "3D Art",
+      "Environment Art",
+      "Animation",
+      "UI/UX Design",
+      "Sound Design",
+      "Music Production",
+      "Narrative Design",
+      "Production & Project Management",
+      "Marketing & Publishing",
+    ],
+    understandFooter:
+      "Before choosing a path, spend some time learning what each field does.",
+    fieldsAnchor: "fields",
   },
   {
     id: 2,
@@ -37,8 +56,24 @@ export const steps = [
     label: "Build",
     title: "Make Small Projects",
     description:
-      "Do NOT start your dream game first. Build Pong, Snake, Flappy Bird, Brick Breaker, Space Shooter, Asteroids, or Tetris — finish at least 2.",
-    videoKey: "step3",
+      "Do NOT start your dream game as your first project. Instead, create small beginner games and finish at least 2 before moving to advanced tutorials.",
+    videoKey: null,
+    beginnerGames: [
+      "Pong",
+      "Snake",
+      "Flappy Bird",
+      "Brick Breaker",
+      "Space Shooter",
+      "Asteroids",
+      "Tetris",
+    ],
+    footerNote:
+      "Finish at least 2 projects, then look for more advanced tutorials.",
+    linkedIn: {
+      label: "PGDA on LinkedIn",
+      url: "https://www.linkedin.com/company/pakistan-game-developer-alliance/?viewAsMember=true",
+      hint: "Follow PGDA and mention us when you share your work.",
+    },
   },
   {
     id: 5,
@@ -47,6 +82,11 @@ export const steps = [
     description:
       "Create LinkedIn, GitHub, ArtStation, and Itch.io profiles. Upload work early — your portfolio starts from day one.",
     videoKey: null,
+    linkedIn: {
+      label: "PGDA on LinkedIn",
+      url: "https://www.linkedin.com/company/pakistan-game-developer-alliance/?viewAsMember=true",
+      hint: "Mention PGDA on your profile so we can review your work.",
+    },
   },
   {
     id: 6,

@@ -37,7 +37,7 @@ export default function Roadmap() {
           The Journey
         </motion.h2>
 
-        <div className="relative flex gap-8 md:gap-12">
+        <div className="relative flex flex-col gap-6 md:flex-row md:gap-12">
           <div
             className="absolute top-5 bottom-5 left-5 hidden w-px md:block"
             style={{
@@ -46,7 +46,7 @@ export default function Roadmap() {
             }}
           />
 
-          <div className="flex shrink-0 flex-col gap-0">
+          <div className="flex shrink-0 flex-row gap-2 overflow-x-auto pb-2 md:flex-col md:gap-0 md:overflow-visible md:pb-0">
             {steps.map((step) => {
               const isActive = activeStep === step.id;
               return (
@@ -54,7 +54,7 @@ export default function Roadmap() {
                   key={step.id}
                   type="button"
                   onClick={() => setActiveStep(step.id)}
-                  className="step-circle relative z-10 mb-8 flex last:mb-0 md:mb-10"
+                  className="step-circle relative z-10 mb-0 flex shrink-0 md:mb-10"
                   aria-label={`Step ${step.id}: ${step.label}`}
                 >
                   <motion.span
@@ -133,9 +133,119 @@ export default function Roadmap() {
                     )}
                   </AnimatePresence>
 
+                  {isActive && step.id === 1 && step.mainFields && (
+                    <div className="mt-5 space-y-4">
+                      {step.understandBody?.map((line) => (
+                        <p
+                          key={line}
+                          className="font-mono text-[0.72rem] leading-relaxed"
+                          style={{ color: "var(--muted)" }}
+                        >
+                          {line}
+                        </p>
+                      ))}
+                      <p
+                        className="font-mono text-[0.62rem] label-upper"
+                        style={{ color: "var(--cyan)" }}
+                      >
+                        Main fields include
+                      </p>
+                      <ul className="grid gap-2 sm:grid-cols-2">
+                        {step.mainFields.map((field) => (
+                          <li
+                            key={field}
+                            className="flex items-start gap-2 rounded border px-3 py-2 font-mono text-[0.68rem] leading-snug"
+                            style={{ borderColor: "var(--border)", color: "var(--text)" }}
+                          >
+                            <span className="shrink-0" style={{ color: "var(--accent)" }}>
+                              •
+                            </span>
+                            {field}
+                          </li>
+                        ))}
+                      </ul>
+                      {step.understandFooter && (
+                        <p
+                          className="font-mono text-[0.72rem] leading-relaxed"
+                          style={{ color: "var(--muted)" }}
+                        >
+                          {step.understandFooter}
+                        </p>
+                      )}
+                      {step.fieldsAnchor && (
+                        <a
+                          href={`#${step.fieldsAnchor}`}
+                          className="inline-block font-mono text-[0.65rem] label-upper transition-colors hover:text-[var(--accent)]"
+                          style={{ color: "var(--cyan)" }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Explore all fields →
+                        </a>
+                      )}
+                    </div>
+                  )}
+
+                  {isActive && step.id === 4 && step.beginnerGames && (
+                    <div className="mt-5">
+                      <p
+                        className="mb-3 font-mono text-[0.62rem] label-upper"
+                        style={{ color: "var(--cyan)" }}
+                      >
+                        Instead create small beginner games like
+                      </p>
+                      <ul className="grid gap-2 sm:grid-cols-2">
+                        {step.beginnerGames.map((game) => (
+                          <li
+                            key={game}
+                            className="flex items-center gap-2 rounded border px-3 py-2 font-mono text-[0.68rem]"
+                            style={{ borderColor: "var(--border)", color: "var(--text)" }}
+                          >
+                            <span style={{ color: "var(--accent)" }}>•</span>
+                            {game}
+                          </li>
+                        ))}
+                      </ul>
+                      {step.footerNote && (
+                        <p
+                          className="mt-4 font-mono text-[0.72rem] leading-relaxed"
+                          style={{ color: "var(--muted)" }}
+                        >
+                          {step.footerNote}
+                        </p>
+                      )}
+                      {step.linkedIn && (
+                        <a
+                          href={step.linkedIn.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-5 inline-flex flex-col gap-1 rounded border px-4 py-3 font-mono text-[0.68rem] transition-all duration-200 hover:border-[var(--accent)] hover:bg-[var(--accent-dim)]"
+                          style={{ borderColor: "var(--border)", color: "var(--text)" }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span className="label-upper text-[0.6rem]" style={{ color: "var(--accent)" }}>
+                            {step.linkedIn.label} ↗
+                          </span>
+                          <span style={{ color: "var(--muted)" }}>{step.linkedIn.hint}</span>
+                        </a>
+                      )}
+                    </div>
+                  )}
+
                   {isActive && step.id === 5 && (
                     <ul className="mt-4 space-y-1 font-mono text-[0.68rem]" style={{ color: "var(--muted)" }}>
-                      <li>→ LinkedIn (mention PGDA)</li>
+                      <li>
+                        →{" "}
+                        <a
+                          href={step.linkedIn?.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="transition-colors hover:text-[var(--accent)]"
+                          style={{ color: "var(--cyan)" }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          LinkedIn (mention PGDA) ↗
+                        </a>
+                      </li>
                       <li>→ GitHub</li>
                       <li>→ ArtStation (artists)</li>
                       <li>→ Itch.io</li>
