@@ -2,11 +2,12 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { useCountUp } from "../hooks/useCountUp";
 import { staggerHero } from "../hooks/useScrollReveal";
+import HeroCarousel from "./HeroCarousel";
 
 const titleLines = [
-  { text: "BUILD", className: "", style: { color: "var(--text)" } },
-  { text: "GAMES.", className: "", style: { color: "var(--accent)" } },
-  { text: "BUILD CAREERS.", className: "stroke-title", style: {} },
+  { text: "BUILD GAMES.", className: "", style: { color: "var(--accent)" } },
+  { text: "BUILD TEAMS.", className: "", style: { color: "var(--text)" } },
+  { text: "BUILD YOUR FUTURE.", className: "stroke-title", style: {} },
 ];
 
 const stats = [
@@ -40,88 +41,108 @@ export default function Hero() {
       className="relative flex min-h-screen items-center px-5 pt-24 pb-16 md:px-8 lg:px-12"
       style={{
         background:
-          "radial-gradient(ellipse 80% 60% at 0% 0%, var(--accent-dim), transparent 55%)",
+          "radial-gradient(ellipse 80% 60% at 0% 0%, var(--accent-dim), transparent 55%), radial-gradient(ellipse 50% 40% at 100% 20%, rgba(98,144,195,0.08), transparent 50%)",
       }}
     >
-      <div className="mx-auto w-full max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border px-4 py-2 font-mono text-[0.6rem] label-upper"
-          style={{ borderColor: "var(--border)", color: "var(--accent)" }}
-        >
-          <span>●</span> Pakistan Game Developers Alliance
-        </motion.div>
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-12">
+        <div className="min-w-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 font-mono text-[0.6rem] label-upper"
+            style={{ borderColor: "var(--border)", color: "var(--accent)" }}
+          >
+            <span>●</span> Pakistan Game Developers Alliance
+          </motion.div>
 
-        <motion.h1
-          className="font-syne hero-title heading-tight mb-8 max-w-4xl font-extrabold"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: staggerHero } },
-          }}
-        >
-          {titleLines.map((line) => (
-            <motion.span
-              key={line.text}
-              className={`block ${line.className}`}
-              style={line.style}
-              variants={{
-                hidden: { opacity: 0, y: 50 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-              }}
+          <motion.h1
+            className="font-syne hero-title heading-tight mb-4 max-w-lg font-extrabold"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: staggerHero } },
+            }}
+          >
+            {titleLines.map((line) => (
+              <motion.span
+                key={line.text}
+                className={`block ${line.className}`}
+                style={line.style}
+                variants={{
+                  hidden: { opacity: 0, y: 50 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+                }}
+              >
+                {line.text}
+              </motion.span>
+            ))}
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: "easeOut", delay: 0.45 }}
+            className="mb-6 max-w-md font-mono text-[0.75rem] leading-[1.8]"
+            style={{ color: "var(--muted)" }}
+          >
+            Let&apos;s start your journey into game development, animation, and creative technology.
+            No prior programming or art experience required — follow the roadmap, build small projects,
+            and grow with Pakistan&apos;s game dev community.
+          </motion.p>
+
+          <motion.div
+            ref={statsRef}
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: "easeOut", delay: 0.55 }}
+            className="mb-8 grid grid-cols-2 gap-6 sm:grid-cols-4"
+          >
+            {stats.map((s) => (
+              <StatItem key={s.label} {...s} active={statsInView} />
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: "easeOut", delay: 0.65 }}
+            className="flex flex-wrap gap-4"
+          >
+            <motion.a
+              href="#roadmap"
+              whileHover={{ y: -2 }}
+              className="btn-primary label-upper inline-block rounded px-6 py-3.5 text-[0.72rem] font-medium"
             >
-              {line.text}
-            </motion.span>
-          ))}
-        </motion.h1>
+              VIEW ROADMAP
+            </motion.a>
+            <motion.a
+              href="#community"
+              whileHover={{ y: -2 }}
+              className="btn-ghost label-upper inline-block rounded px-6 py-3.5 text-[0.72rem] font-medium"
+            >
+              JOIN PGDA →
+            </motion.a>
+          </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: "easeOut", delay: 0.45 }}
-          className="mb-10 max-w-[460px] font-mono text-[0.78rem] leading-[1.85]"
-          style={{ color: "var(--muted)" }}
-        >
-          Your complete roadmap into the game development industry — for school, college,
-          university students, and hobbyists. No prior programming or art experience required.
-          Start building projects, not chasing expert status first.
-        </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.75 }}
+            className="mt-10 sm:hidden"
+          >
+            <HeroCarousel />
+          </motion.div>
+        </div>
 
         <motion.div
-          ref={statsRef}
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: "easeOut", delay: 0.55 }}
-          className="mb-10 grid grid-cols-2 gap-8 sm:grid-cols-4"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
+          className="hidden min-w-0 sm:block"
         >
-          {stats.map((s) => (
-            <StatItem key={s.label} {...s} active={statsInView} />
-          ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: "easeOut", delay: 0.65 }}
-          className="flex flex-wrap gap-4"
-        >
-          <motion.a
-            href="#roadmap"
-            whileHover={{ y: -2 }}
-            className="btn-primary label-upper inline-block rounded px-6 py-3.5 text-[0.72rem] font-medium"
-          >
-            START YOUR JOURNEY
-          </motion.a>
-          <motion.a
-            href="#roadmap"
-            whileHover={{ y: -2 }}
-            className="btn-ghost label-upper inline-block rounded px-6 py-3.5 text-[0.72rem] font-medium"
-          >
-            VIEW ROADMAP →
-          </motion.a>
+          <HeroCarousel />
         </motion.div>
       </div>
     </section>

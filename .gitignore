@@ -9,6 +9,9 @@ lerna-debug.log*
 
 node_modules
 dist
+
+# Local source assets (duplicates of public/portfolio)
+Picutres POrtoflio/
 dist-ssr
 *.local
 

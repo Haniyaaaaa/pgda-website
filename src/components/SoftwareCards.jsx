@@ -113,10 +113,11 @@ export default function SoftwareCards() {
             Quick picks
           </p>
           <p>
-            <strong style={{ color: "var(--text)" }}>Unity</strong> — new, low/mid PC, ship games fast.{" "}
+            <strong style={{ color: "var(--text)" }}>Unity</strong> — beginners, low/mid PC, ship games fast.{" "}
             <strong style={{ color: "var(--text)" }}>Godot</strong> — very low-end, open-source.{" "}
             <strong style={{ color: "var(--text)" }}>Unreal</strong> — capable PC, AAA visuals.{" "}
-            <strong style={{ color: "var(--text)" }}>Blender</strong> — 3D models & environments.
+            <strong style={{ color: "var(--text)" }}>Blender / Maya</strong> — 3D art & animation.{" "}
+            <strong style={{ color: "var(--text)" }}>Aseprite / Photoshop</strong> — pixel art & 2D UI.
           </p>
         </motion.div>
       </div>

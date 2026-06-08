@@ -11,6 +11,12 @@ import {
   staggerMedium,
 } from "../hooks/useScrollReveal";
 
+const linkStyles = {
+  whatsapp: { border: "rgba(37, 211, 102, 0.3)", color: "#25D366" },
+  discord: { border: "rgba(88, 101, 242, 0.3)", color: "#5865F2" },
+  linkedin: { border: "rgba(10, 102, 194, 0.3)", color: "#0A66C2" },
+};
+
 export default function Roadmap() {
   const [activeStep, setActiveStep] = useState(0);
 
@@ -32,10 +38,21 @@ export default function Roadmap() {
           whileInView={revealAnimate}
           viewport={revealViewport}
           transition={{ ...revealTransition, delay: 0.05 }}
-          className="font-syne mb-16 text-3xl font-extrabold heading-tight md:text-4xl lg:text-5xl"
+          className="font-syne mb-4 text-3xl font-extrabold heading-tight md:text-4xl lg:text-5xl"
         >
           The Journey
         </motion.h2>
+        <motion.p
+          initial={revealInitial}
+          whileInView={revealAnimate}
+          viewport={revealViewport}
+          transition={{ ...revealTransition, delay: 0.08 }}
+          className="mb-16 max-w-2xl font-mono text-[0.72rem] leading-relaxed"
+          style={{ color: "var(--muted)" }}
+        >
+          A beginner roadmap — not a random tutorial dump. Understand the field, pick your tools,
+          learn from curated resources, build small projects, share your work, and join the community.
+        </motion.p>
 
         <div className="relative flex flex-col gap-6 md:flex-row md:gap-12">
           <div
@@ -116,6 +133,15 @@ export default function Roadmap() {
                     {step.description}
                   </p>
 
+                  {isActive && step.introNote && (
+                    <p
+                      className="mt-4 rounded border px-4 py-3 font-mono text-[0.68rem] leading-relaxed"
+                      style={{ borderColor: "var(--border)", color: "var(--cyan)", background: "var(--bg)" }}
+                    >
+                      {step.introNote}
+                    </p>
+                  )}
+
                   {step.anchor && isActive && (
                     <a
                       href={`#${step.anchor}`}
@@ -148,7 +174,7 @@ export default function Roadmap() {
                         className="font-mono text-[0.62rem] label-upper"
                         style={{ color: "var(--cyan)" }}
                       >
-                        Main fields include
+                        Game development includes
                       </p>
                       <ul className="grid gap-2 sm:grid-cols-2">
                         {step.mainFields.map((field) => (
@@ -191,7 +217,7 @@ export default function Roadmap() {
                         className="mb-3 font-mono text-[0.62rem] label-upper"
                         style={{ color: "var(--cyan)" }}
                       >
-                        Instead create small beginner games like
+                        Start with small beginner games like
                       </p>
                       <ul className="grid gap-2 sm:grid-cols-2">
                         {step.beginnerGames.map((game) => (
@@ -207,18 +233,41 @@ export default function Roadmap() {
                       </ul>
                       {step.footerNote && (
                         <p
-                          className="mt-4 font-mono text-[0.72rem] leading-relaxed"
-                          style={{ color: "var(--muted)" }}
+                          className="mt-4 font-syne text-sm font-bold"
+                          style={{ color: "var(--accent)" }}
                         >
                           {step.footerNote}
                         </p>
                       )}
+                    </div>
+                  )}
+
+                  {isActive && step.id === 5 && step.platforms && (
+                    <div className="mt-5 space-y-4">
+                      <div className="grid gap-2 sm:grid-cols-2">
+                        {step.platforms.map((platform) => (
+                          <a
+                            key={platform.name}
+                            href={platform.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex flex-col gap-1 rounded border px-4 py-3 font-mono text-[0.68rem] transition-all duration-200 hover:border-[var(--accent)] hover:bg-[var(--accent-dim)]"
+                            style={{ borderColor: "var(--border)", color: "var(--text)" }}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <span className="label-upper text-[0.6rem]" style={{ color: "var(--accent)" }}>
+                              {platform.name} ↗
+                            </span>
+                            <span style={{ color: "var(--muted)" }}>{platform.hint}</span>
+                          </a>
+                        ))}
+                      </div>
                       {step.linkedIn && (
                         <a
                           href={step.linkedIn.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="mt-5 inline-flex flex-col gap-1 rounded border px-4 py-3 font-mono text-[0.68rem] transition-all duration-200 hover:border-[var(--accent)] hover:bg-[var(--accent-dim)]"
+                          className="inline-flex w-full flex-col gap-1 rounded border px-4 py-3 font-mono text-[0.68rem] transition-all duration-200 hover:border-[var(--accent)] hover:bg-[var(--accent-dim)] sm:w-auto"
                           style={{ borderColor: "var(--border)", color: "var(--text)" }}
                           onClick={(e) => e.stopPropagation()}
                         >
@@ -231,25 +280,25 @@ export default function Roadmap() {
                     </div>
                   )}
 
-                  {isActive && step.id === 5 && (
-                    <ul className="mt-4 space-y-1 font-mono text-[0.68rem]" style={{ color: "var(--muted)" }}>
-                      <li>
-                        →{" "}
-                        <a
-                          href={step.linkedIn?.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="transition-colors hover:text-[var(--accent)]"
-                          style={{ color: "var(--cyan)" }}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          LinkedIn (mention PGDA) ↗
-                        </a>
-                      </li>
-                      <li>→ GitHub</li>
-                      <li>→ ArtStation (artists)</li>
-                      <li>→ Itch.io</li>
-                    </ul>
+                  {isActive && step.id === 6 && step.communityLinks && (
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {step.communityLinks.map((link) => {
+                        const style = linkStyles[link.style] ?? linkStyles.discord;
+                        return (
+                          <a
+                            key={link.label}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded border px-4 py-2.5 font-mono text-[0.65rem] label-upper transition-all duration-200 hover:bg-[var(--accent-dim)]"
+                            style={{ borderColor: style.border, color: style.color }}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {link.label} ↗
+                          </a>
+                        );
+                      })}
+                    </div>
                   )}
 
                   {isActive && step.id === 7 && (

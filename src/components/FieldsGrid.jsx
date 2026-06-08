@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { fields } from "../data/fields";
+import FieldIcon from "./FieldIcon";
 import {
   revealAnimate,
   revealInitial,
@@ -56,7 +57,11 @@ export default function FieldsGrid() {
               style={{ background: "var(--card)", borderColor: "var(--border)" }}
             >
               <div className="relative z-10 transition-colors duration-200 group-hover:text-[var(--bg)]">
-                <span className="mb-3 block text-2xl">{field.icon}</span>
+                <FieldIcon
+                  id={field.id}
+                  className="mb-3 block text-[1.35rem] transition-colors duration-200 group-hover:text-[var(--bg)]"
+                  style={{ color: "var(--accent)" }}
+                />
                 <h3 className="font-syne text-sm font-bold leading-tight">{field.name}</h3>
               </div>
             </motion.div>

@@ -49,38 +49,29 @@ export default function CustomCursor() {
       animate={{
         left: pos.x,
         top: pos.y,
-        scale: hovering ? 2.2 : 1,
         opacity: visible ? 1 : 0,
       }}
-      transition={{ type: "spring", stiffness: 500, damping: 28 }}
+      transition={{ type: "spring", stiffness: 600, damping: 32, mass: 0.4 }}
     >
-      <div
-        className="-translate-x-1/2 -translate-y-1/2"
+      <motion.div
+        className="-translate-x-1/2 -translate-y-1/2 rounded-full"
+        animate={{
+          width: hovering ? 36 : 18,
+          height: hovering ? 36 : 18,
+        }}
+        transition={{ type: "spring", stiffness: 400, damping: 28 }}
         style={{
-          width: 8,
-          height: 8,
-          background: "var(--accent)",
-          boxShadow: hovering
-            ? "0 0 12px rgba(186,255,41,0.8)"
-            : "0 0 6px rgba(186,255,41,0.5)",
+          border: "2px solid var(--accent)",
+          background: hovering ? "rgba(186, 255, 41, 0.12)" : "transparent",
+          boxShadow: hovering ? "0 0 16px rgba(186, 255, 41, 0.35)" : "none",
         }}
       />
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
-          width: hovering ? 20 : 14,
-          height: 1,
+          width: 5,
+          height: 5,
           background: "var(--accent)",
-          opacity: 0.6,
-        }}
-      />
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        style={{
-          width: 1,
-          height: hovering ? 20 : 14,
-          background: "var(--accent)",
-          opacity: 0.6,
         }}
       />
     </motion.div>
