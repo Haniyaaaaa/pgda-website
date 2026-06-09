@@ -1,5 +1,6 @@
 export default function Logo({ size = "nav", className = "" }) {
-  const textSize = size === "footer" ? "text-base" : "text-lg sm:text-xl";
+  const textSize =
+    size === "footer" ? "text-base" : "text-xl sm:text-2xl md:text-[1.65rem]";
 
   return (
     <span
