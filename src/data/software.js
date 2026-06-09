@@ -24,14 +24,6 @@ export const software = [
     specs: "x86_64 SSE4.2 · 4 cores · OpenGL 3.3+ / Vulkan · Win/macOS/Linux",
   },
   {
-    id: "blender",
-    name: "Blender",
-    difficulty: "Beginner",
-    description:
-      "Free 3D modeling, sculpting, animation, and environment art. Essential for 3D artists and indie asset creation.",
-    specs: "4-core SSE4.2 · 8 GB RAM · 2 GB VRAM · OpenGL 4.3",
-  },
-  {
     id: "maya",
     name: "Blender / Maya",
     difficulty: "Intermediate",

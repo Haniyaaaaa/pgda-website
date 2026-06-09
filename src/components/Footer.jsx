@@ -15,7 +15,7 @@ export default function Footer() {
     >
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
         <a href="#" className="transition-opacity duration-200 hover:opacity-90">
-          <Logo size="footer" showAlliance />
+          <Logo size="footer" />
         </a>
 
         <p

@@ -42,7 +42,9 @@ export default function HeroCarousel() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.99 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="absolute inset-0 h-full w-full object-contain"
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="eager"
+            decoding="async"
           />
         </AnimatePresence>
       </div>
